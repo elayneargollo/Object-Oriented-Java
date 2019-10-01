@@ -50,7 +50,7 @@ public class View {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				// capturar o click do botão
+				// tratamento de evento
 			}
 		});
 		
