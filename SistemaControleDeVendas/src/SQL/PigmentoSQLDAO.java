@@ -146,10 +146,16 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 		System.out.println("Cor: " +resultado.getNomeFantasia() +"\nQuantidade Pedida: " +quantidade);
 
 		/*eu debito do estoque*/
+<<<<<<< HEAD
 	//	resultado.debitar(quantidade);		
 	//	update(resultado);		
 	//	System.out.println("\nQuantidade atualizada: " +resultado.getQuantidade());
 		
+=======
+		resultado.debitar(quantidade);
+		
+		update(resultado);		
+>>>>>>> ee45c0fcb04a8bf8543b3454be578ebca92eafe6
 		return resultado;
 	}
 
