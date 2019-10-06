@@ -18,8 +18,6 @@ public class View {
 	private JFrame frame;
 	private JTextField textCor;
 	private JTextField textQuantidade;
-	
-	// criar um app e instanciar 
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -45,12 +43,10 @@ public class View {
 		frame.getContentPane().setLayout(null);
 		
 		JButton BotaoEnviar = new JButton("Enviar");
-		
 		BotaoEnviar.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				// tratamento de evento
+				JOptionPane.showMessageDialog(null, "Cor: " +textCor.getText() + "\nQuantidade: "+textQuantidade.getText());
 			}
 		});
 		
