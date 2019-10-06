@@ -35,6 +35,7 @@ public abstract class Cor {
 	public abstract String toString();	
 	public abstract int setQuantidade(int quantidade);
 	public abstract void setCor(String hex);
-	public abstract double distanciaEuclidiana(RGB cor);
+	public abstract double getdistanciaEuclidiana(RGB cor);
+
 	
 }

@@ -47,7 +47,7 @@ public class RGB extends Cor {
 	}
 	
 	@Override
-	public double distanciaEuclidiana(RGB cor) {
+	public double getdistanciaEuclidiana(RGB cor) {
 		
 		double qtrBlue= (this.blue - cor.getBlue());
 		double qtrGreen= (this.green - cor.getGreen());
@@ -66,7 +66,7 @@ public class RGB extends Cor {
 
 	@Override
 	public int setQuantidade(int quantidade) {
-		// TODO Auto-generated method stub
+	
 		return 0;
 	}
 

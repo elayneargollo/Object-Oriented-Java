@@ -66,7 +66,7 @@ public class CMYK extends Cor{
 	}
 	
 	@Override
-	public double distanciaEuclidiana(RGB cor) {
+	public double getdistanciaEuclidiana(RGB cor) {
 		
 		double qtrBlue= (((int) (255 * (1-Y) * (1-k))) - cor.getBlue());
 		double qtrGreen= (((int) (255 * (1-M) * (1-k))) - cor.getGreen());

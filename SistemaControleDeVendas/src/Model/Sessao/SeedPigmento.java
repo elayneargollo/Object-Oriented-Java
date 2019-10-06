@@ -14,8 +14,8 @@ public class SeedPigmento {
 
 	private PigmentoDAO pigmentoDAO = new PigmentoSQLDAO();
 	//private Pigmento pigmento = new Pigmento();
-	private int quantidade = 45;
-	private String cor = "008B8B";
+	private int quantidade = 2;
+	private String cor = "b56d72";
 
 	public SeedPigmento(){
 	
@@ -27,7 +27,7 @@ public class SeedPigmento {
 	//	pigmento.setPreco(25);
 		//pigmento.setQuantidade(15);
 		
-		/*Cor corrbb1 = new RGB();
+	/*	Cor corrbb1 = new RGB();
 		Cor corcmyk1 = new CMYK();
 		
 		((RGB)corrbb1).setCor("008B8B");		

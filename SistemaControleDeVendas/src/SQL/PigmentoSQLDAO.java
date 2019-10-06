@@ -24,7 +24,7 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 			"WHERE nome = ?";*/
 	
 	private static final String INSERT_PIGMENTO = 
-			"INSERT INTO pigmento(preco, quantidade, id_pigmento, nome) " +
+			"INSERT INTO pigmento(preco, quantidade, id_pigmento, NomeFantasia) " +
 			"VALUES(?, ?, ?, ?)";
 	
 	private static final String SELECT_QUANTIDADECMYK=
@@ -77,7 +77,7 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 			pigmento = new Pigmento();
 			RGB rgb;
 			
-			pigmento.setid_pigmento(rSetRgb.getString("id_pigmento"));
+			pigmento.setNomeFantasia(rSetRgb.getString("NomeFantasia"));
 			pigmento.setQuantidade(rSetRgb.getFloat("quantidade"));
 					
 			rgb = new RGB(	rSetRgb.getInt("red"),
@@ -111,9 +111,29 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 
 	@Override
 	public Pigmento searchForRequest(String pigmento, ArrayList<Pigmento> p) throws ClassNotFoundException, SQLException {
-		double menor = 0;
+	
+		double[] distancia = new double[p.size()];
+		double menor = distancia[0];
+		int j=0;
 		
-		return null;
+		RGB c = new RGB();		
+		((RGB)c).setCor(pigmento);	
+		
+		for (int i=0; i< p.size(); i++) {
+			distancia[i] = p.get(i).getCor().getdistanciaEuclidiana(c);
+			
+			if (distancia[i]<menor) {
+				menor = distancia[i];
+				j=i;
+			}
+		}
+		
+		pigmento = p.get(j).getid_pigmento();
+		
+		//System.out.println("Cor: " +p.get(j).getid_pigmento());
+		//System.out.println("Distancia: " +menor);
+		
+		return p.get(j);
 	}
 
 	@Override
@@ -121,10 +141,13 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 	
 		ArrayList<Pigmento> p = searchByQuantity(quantidade);
 		Pigmento resultado = searchForRequest(pigmento, p);
+	
+		System.out.println("Cor: " +resultado.getNomeFantasia() +"\nQuantidade: " +resultado.getQuantidade());
 		
-		for (Pigmento a : p) {
-			System.out.println(a.getCor());
-		}
+		
+		
+		/*se ele comprar ... */
+		
 		
 		return resultado;
 	}
