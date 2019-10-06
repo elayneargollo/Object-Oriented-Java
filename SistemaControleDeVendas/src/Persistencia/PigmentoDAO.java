@@ -1,14 +1,16 @@
 package Persistencia;
 
-import java.util.Collection;
-
-import Model.Entidades.Cor;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import Model.Entidades.Pigmento;
 
 public interface PigmentoDAO {
-	
-	public Cor procurar(String hexa) throws ClassNotFoundException; // procura pelo pigmento 
-	public void update(Pigmento p) throws ClassNotFoundException; // atualizar o estoque
-	public Collection<Pigmento> findAll() throws ClassNotFoundException;
 
+	/* ele vai atualizar o estoque da cor - ok */
+	//public void update(Pigmento p) throws ClassNotFoundException, SQLException; 
+	
+	public void save(Pigmento p) throws ClassNotFoundException, SQLException;
+	public ArrayList<Pigmento> searchByQuantity(int quantidade) throws ClassNotFoundException, SQLException;
+	public Pigmento searchForRequest(String pigmento ,ArrayList<Pigmento> p) throws ClassNotFoundException, SQLException;
+	public Pigmento search(int quantidade, String pigmento) throws ClassNotFoundException, SQLException;
 }

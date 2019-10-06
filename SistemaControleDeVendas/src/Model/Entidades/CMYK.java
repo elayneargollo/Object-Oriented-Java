@@ -5,8 +5,43 @@ public class CMYK extends Cor{
 	private double C;
 	private double M;
 	private double Y;
-	private double k;
+	private double k;	
+
+	public CMYK() {
+	}
+
+	public String toString() {
+		return "ciano: " +getC() 
+				+"\namarelo: " +getY()
+				+"\nmagenta: " +getM()
+				+"\npreto: " +getK()
+				+"\n-----------";
+	}
 	
+	public CMYK(double c, double m, double y, double k) {
+		super();
+		C = c;
+		M = m;
+		Y = y;
+		this.k = k;
+	}
+
+	public double getC() {
+		return C;
+	}
+
+	public double getM() {
+		return M;
+	}
+
+	public double getY() {
+		return Y;
+	}
+
+	public double getK() {
+		return k;
+	}
+
 	@Override
 	public void setCor(String hex) {
 		
@@ -23,9 +58,9 @@ public class CMYK extends Cor{
 		
 		minCMY = Math.min(C,Math.min(M,Y));
 				  
-		C = (C - minCMY) / (1.0-minCMY) ; 
-		M = (M - minCMY) / (1.0-minCMY) ; 
-		Y = (Y - minCMY) / (1.0-minCMY) ;
+		C = ((C - minCMY) / (1.0-minCMY)) ; 
+		M =  ((M - minCMY) / (1.0-minCMY)) ; 
+		Y = ((Y - minCMY) / (1.0-minCMY)) ;
 		k = minCMY;	
 		
 	}
@@ -48,17 +83,6 @@ public class CMYK extends Cor{
 		return Math.sqrt(Math.pow(qtrRed, 2) + Math.pow(qtrGreen, 2) + Math.pow(qtrBlue, 2));
 	}
 	
-	@Override
-	public String toString() {
-		return "\nCyano:"
-				+C
-				+"\nMargenta:"
-				+M
-				+"\nYeloow:"
-				+Y
-				+"\nBlack:"
-				+k;
-	}
 
 	@Override
 	public int setQuantidade(int quantidade) {
