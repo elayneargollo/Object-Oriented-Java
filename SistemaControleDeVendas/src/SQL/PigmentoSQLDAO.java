@@ -147,10 +147,7 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 		/*eu debito do estoque*/
 		resultado.debitar(quantidade);
 		
-		update(resultado);
-		
-	//	System.out.println("\nQuantidade atualizada: " +resultado.getQuantidade());
-		
+		update(resultado);		
 		return resultado;
 	}
 
