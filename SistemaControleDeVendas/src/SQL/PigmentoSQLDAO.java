@@ -118,6 +118,7 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 		int j=0;
 
 		RGB c = new RGB();		
+	//	System.out.println(pigmento);
 		((RGB)c).setCor(pigmento);	
 
 		for (int i=0; i< p.size(); i++) {
@@ -136,19 +137,17 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 
 	@Override
 	public Pigmento search(int quantidade, String pigmento) throws ClassNotFoundException, SQLException {
+		
+		pigmentos.clear();
 	
 		ArrayList<Pigmento> p = searchByQuantity(quantidade);
 		Pigmento resultado = searchForRequest(pigmento, p);
 	
 		System.out.println("Cor: " +resultado.getNomeFantasia() +"\nQuantidade Pedida: " +quantidade);
-		
-		/*se ele comprar ... */
-		System.out.println("Preco a pagar: R$ " +resultado.valor(quantidade));
+
 		/*eu debito do estoque*/
-		resultado.debitar(quantidade);
-		
-		update(resultado);
-		
+	//	resultado.debitar(quantidade);		
+	//	update(resultado);		
 	//	System.out.println("\nQuantidade atualizada: " +resultado.getQuantidade());
 		
 		return resultado;

@@ -38,6 +38,7 @@ public class RGB extends Cor {
 
 	public void setCor(String hex){
 		
+
 		String base = hex;
 		
 		red = Integer.parseInt ((String) base.subSequence(0, 2), 16);
