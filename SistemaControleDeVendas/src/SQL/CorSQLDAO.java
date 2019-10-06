@@ -19,8 +19,8 @@ public class CorSQLDAO extends AbstractSQLDAO implements CorDAO {
 		PreparedStatement stmt = this.getConnection().prepareStatement(CorSQLDAO.getInsert(cor));
 		
 		if (cor instanceof RGB) {
+			
 			stmt.setInt(1, ((RGB)cor).getRed());
-			System.out.println(((RGB)cor).getRed());
 			stmt.setInt(2, ((RGB)cor).getGreen());
 			stmt.setInt(3, ((RGB)cor).getBlue());
 			stmt.setString(4, pigmento.getid_pigmento());
@@ -29,6 +29,7 @@ public class CorSQLDAO extends AbstractSQLDAO implements CorDAO {
 			stmt.close();
 		}
 		else if (cor instanceof CMYK) {
+			
 			stmt.setFloat(1, (float) ((CMYK)cor).getK());
 			stmt.setFloat(2, (float) ((CMYK)cor).getM());
 			stmt.setFloat(3, (float) ((CMYK)cor).getY());

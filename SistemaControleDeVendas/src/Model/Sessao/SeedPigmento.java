@@ -13,9 +13,8 @@ import SQL.PigmentoSQLDAO;
 public class SeedPigmento {
 
 	private PigmentoDAO pigmentoDAO = new PigmentoSQLDAO();
-	//private Pigmento pigmento = new Pigmento();
 	private int quantidade = 2;
-	private String cor = "b56d72";
+	private String cor = "63B8FF";
 
 	public SeedPigmento(){
 	
@@ -28,7 +27,7 @@ public class SeedPigmento {
 		//pigmento.setQuantidade(15);
 		
 	/*	Cor corrbb1 = new RGB();
-		Cor corcmyk1 = new CMYK();
+		Cor corcmyk1 = new CMYK();63B8FF
 		
 		((RGB)corrbb1).setCor("008B8B");		
 		((CMYK)corcmyk1).setCor("63B8FF");		
@@ -39,7 +38,7 @@ public class SeedPigmento {
 		
 		//pigmentoDAO.save(pigmento);
 		try {
-			pigmentoDAO.search(quantidade,"008B8B");
+			pigmentoDAO.search(quantidade,"63B8FF");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,6 +46,4 @@ public class SeedPigmento {
 //	pigmentoDAO.serachForRequest("008B8B", p);
 	}
 
-	
-	
 }

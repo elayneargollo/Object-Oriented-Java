@@ -1,6 +1,6 @@
 package Model.Entidades;
 
-public abstract class Cor {
+public abstract class Cor extends Pigmento {
 	private Cor RGB;
 	private Cor CMYK;
 	protected String hex;
@@ -33,7 +33,6 @@ public abstract class Cor {
 	}
 	
 	public abstract String toString();	
-	public abstract int setQuantidade(int quantidade);
 	public abstract void setCor(String hex);
 	public abstract double getdistanciaEuclidiana(RGB cor);
 

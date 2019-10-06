@@ -4,7 +4,7 @@ package Model.Entidades;
 public class Pigmento{
 	
 	private float preco;
-	private float quantidade;
+	protected float quantidade;
 	private String id_pigmento;
 	private String nomeFantasia;
 	private Cor cor;
@@ -20,13 +20,22 @@ public class Pigmento{
 		this.preco = preco;
 	}
 
+	public float valor (float quantidade) {
+		return quantidade*this.preco;
+	}
+
 	public float getQuantidade() {
 		return quantidade;
 	}
 
 	public void setQuantidade(float quantidade) {
-		this.quantidade = quantidade;
+		this.quantidade = quantidade;		
 	}
+	
+	public void debitar (float pedido) {
+		this.quantidade = quantidade - pedido;
+	}
+	
 
 	public String getid_pigmento() {
 		return id_pigmento;
@@ -52,7 +61,7 @@ public class Pigmento{
 		this.cor = cor;
 	}
 
-
+	
 
 }
 

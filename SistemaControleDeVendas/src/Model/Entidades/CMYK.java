@@ -83,12 +83,5 @@ public class CMYK extends Cor{
 		return Math.sqrt(Math.pow(qtrRed, 2) + Math.pow(qtrGreen, 2) + Math.pow(qtrBlue, 2));
 	}
 	
-
-	@Override
-	public int setQuantidade(int quantidade) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }
 	

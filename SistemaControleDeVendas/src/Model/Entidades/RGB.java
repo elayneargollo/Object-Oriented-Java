@@ -24,7 +24,6 @@ public class RGB extends Cor {
 		this.blue = blue;
 	}
 	
-	
 	public int getRed() {
 		return red;
 	}
@@ -63,12 +62,5 @@ public class RGB extends Cor {
 
 		return Math.sqrt(Math.pow(qtrRed, 2) + Math.pow(qtrGreen, 2) + Math.pow(qtrBlue, 2));
 	}
-
-	@Override
-	public int setQuantidade(int quantidade) {
-	
-		return 0;
-	}
-
 
 }

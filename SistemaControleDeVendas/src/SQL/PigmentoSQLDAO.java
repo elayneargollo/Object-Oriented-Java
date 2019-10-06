@@ -18,10 +18,10 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 	ArrayList<Pigmento> pigmentos = new ArrayList();
 	CorSQLDAO corsql = new CorSQLDAO();
 	
-	/*private static final String UPDATE_QUANTIDADE = 
-			"UPDATE Pigmento " + 
+	private static final String UPDATE_QUANTIDADE = 
+			"UPDATE pigmento " + 
 			"SET quantidade = ? " +
-			"WHERE nome = ?";*/
+			"WHERE nomefantasia = ?";
 	
 	private static final String INSERT_PIGMENTO = 
 			"INSERT INTO pigmento(preco, quantidade, id_pigmento, NomeFantasia) " +
@@ -33,7 +33,6 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 			" ON pi.id_pigmento = cm.id_pigmento " +
 			" WHERE quantidade >= ? ";
 	
-
 	private static final String SELECT_QUANTIDADERGB=
 			" SELECT * FROM pigmento as pi " +
 			" INNER JOIN RGB as rgb " +
@@ -78,6 +77,7 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 			RGB rgb;
 			
 			pigmento.setNomeFantasia(rSetRgb.getString("NomeFantasia"));
+			pigmento.setPreco(rSetRgb.getFloat("preco"));
 			pigmento.setQuantidade(rSetRgb.getFloat("quantidade"));
 					
 			rgb = new RGB(	rSetRgb.getInt("red"),
@@ -92,7 +92,8 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 			pigmento = new Pigmento();
 			CMYK cmyk;
 			
-			pigmento.setid_pigmento(rSetCmyk.getString("id_pigmento"));
+			pigmento.setNomeFantasia(rSetCmyk.getString("id_pigmento"));
+			pigmento.setPreco(rSetCmyk.getFloat("preco"));
 			pigmento.setQuantidade(rSetCmyk.getFloat("quantidade"));
 					
 			cmyk = new CMYK(rSetCmyk.getDouble("ciano"),
@@ -115,24 +116,21 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 		double[] distancia = new double[p.size()];
 		double menor = distancia[0];
 		int j=0;
-		
+
 		RGB c = new RGB();		
 		((RGB)c).setCor(pigmento);	
-		
+
 		for (int i=0; i< p.size(); i++) {
+
 			distancia[i] = p.get(i).getCor().getdistanciaEuclidiana(c);
-			
-			if (distancia[i]<menor) {
+
+			if (distancia[i]<=menor) {
 				menor = distancia[i];
-				j=i;
+				j = i;
 			}
 		}
 		
 		pigmento = p.get(j).getid_pigmento();
-		
-		//System.out.println("Cor: " +p.get(j).getid_pigmento());
-		//System.out.println("Distancia: " +menor);
-		
 		return p.get(j);
 	}
 
@@ -142,16 +140,31 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 		ArrayList<Pigmento> p = searchByQuantity(quantidade);
 		Pigmento resultado = searchForRequest(pigmento, p);
 	
-		System.out.println("Cor: " +resultado.getNomeFantasia() +"\nQuantidade: " +resultado.getQuantidade());
-		
-		
+		System.out.println("Cor: " +resultado.getNomeFantasia() +"\nQuantidade Pedida: " +quantidade);
 		
 		/*se ele comprar ... */
+		System.out.println("Preco a pagar: R$ " +resultado.valor(quantidade));
+		/*eu debito do estoque*/
+		resultado.debitar(quantidade);
 		
+		update(resultado);
+		
+	//	System.out.println("\nQuantidade atualizada: " +resultado.getQuantidade());
 		
 		return resultado;
 	}
 
+	@Override
+	public void update(Pigmento p) throws ClassNotFoundException, SQLException {
 	
+		PreparedStatement stmt = this.getConnection().prepareStatement(PigmentoSQLDAO.UPDATE_QUANTIDADE);
+		
+		stmt.setFloat(1, p.getQuantidade());
+		stmt.setString(2, p.getNomeFantasia());
+		stmt.executeUpdate();		
+		stmt.close();
+		
+	}
 	
+
 }
