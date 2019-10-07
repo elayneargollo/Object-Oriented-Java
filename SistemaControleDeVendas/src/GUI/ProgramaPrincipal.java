@@ -8,7 +8,7 @@ public class ProgramaPrincipal {
 		CorFrame corFrame = new CorFrame();
 
 		corFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		corFrame.setSize(530,260);
+		corFrame.setSize(350,250);
 		corFrame.setVisible(true);
 		
 		

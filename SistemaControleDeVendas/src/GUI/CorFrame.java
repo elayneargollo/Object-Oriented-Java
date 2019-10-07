@@ -26,9 +26,6 @@ public class CorFrame extends JFrame{
 	private JTextField nomeField;
 	private JTextField qtdeField;
 	
-	
-	private JTextField quantidadeField;
-	
 	CorFrame (){
 		super("Controle de Vendas");
 		
@@ -37,7 +34,7 @@ public class CorFrame extends JFrame{
 	}
 	
 	private void criarFormulario() {
-		setLayout(new BorderLayout());
+		setLayout(new BorderLayout(15,15)); 
 		
 		JFrame context = this;
 		
@@ -45,7 +42,7 @@ public class CorFrame extends JFrame{
 		panelTitulo.setLayout(new FlowLayout());
 		
 		JLabel titulo = new JLabel ("Solicitar Cor");
-		titulo.setFont(new Font("Verdana", Font.PLAIN, 16));
+		titulo.setFont(new Font("Verdana", Font.PLAIN, 16)); 
 		
 		panelTitulo.add(titulo);
 		
@@ -54,10 +51,11 @@ public class CorFrame extends JFrame{
 		
 		/* CAMPOS */
 		JLabel nomeLabel = new JLabel ("Cor");
-		nomeField = new JTextField(40);
+		nomeField = new JTextField(24);
 		
 		JLabel quantidadeLabel = new JLabel ("Quantidade");
-		qtdeField = new JTextField(40);
+		qtdeField = new JTextField(19);
+	
 		
 		panelFormulario.add(nomeLabel);
 		panelFormulario.add(nomeField);
@@ -68,7 +66,6 @@ public class CorFrame extends JFrame{
 		JPanel panelBotao = new JPanel();
 		panelBotao.setLayout(new FlowLayout());
 	
-
 		JButton botaoEnviar = new JButton("Enviar");
 		
 		botaoEnviar.addActionListener(new ActionListener() {		
@@ -95,8 +92,7 @@ public class CorFrame extends JFrame{
 					System.exit(0);
 				}
 				
-				try {
-						
+				try {						
 						pigmento = pigmentoDAO.search(quantidade, nomeField.getText());
 						
 						int escolha = JOptionPane.showConfirmDialog(context, "Pigmento: " +pigmento.getNomeFantasia() + "\nPreco: R$ " +pigmento.valor(quantidade) + "\n\nDeseja realizar a compra ?","Confirmar Compra",JOptionPane.YES_NO_OPTION);
@@ -104,8 +100,7 @@ public class CorFrame extends JFrame{
 						if(escolha == JOptionPane.YES_OPTION) {				
 							
 							pigmento.debitar(quantidade);		
-							pigmentoDAO.update(pigmento);	
-							
+							pigmentoDAO.update(pigmento);								
 						} 
 
 				} catch (ClassNotFoundException | SQLException |IllegalAccessException e) {
