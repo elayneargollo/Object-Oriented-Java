@@ -40,85 +40,91 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 			" WHERE quantidade >= ? ";
 	
 	@Override
-	public void  save(Pigmento p) throws ClassNotFoundException, SQLException {
+	public void  save(Pigmento p) throws ClassNotFoundException, SQLException, IllegalAccessException {
 		
-		
-		PreparedStatement stmt = this.getConnection().prepareStatement(PigmentoSQLDAO.INSERT_PIGMENTO);
-		stmt.setFloat(1, p.getPreco());
-		stmt.setFloat(2, p.getQuantidade());
-		stmt.setString(3, p.getid_pigmento());
-		stmt.setString(4, p.getNomeFantasia());
-		
-		stmt.executeUpdate();
-		
-		corsql.save(p.getCor(), p);
-		
-		stmt.close();
+		try {
+			PreparedStatement stmt = this.getConnection().prepareStatement(PigmentoSQLDAO.INSERT_PIGMENTO);
+			stmt.setFloat(1, p.getPreco());
+			stmt.setFloat(2, p.getQuantidade());
+			stmt.setString(3, p.getid_pigmento());
+			stmt.setString(4, p.getNomeFantasia());
+			
+			stmt.executeUpdate();
+			
+			corsql.save(p.getCor(), p);
+			
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException (e);
+		}
 		
 	}
 
 	@Override
-	public ArrayList<Pigmento> searchByQuantity(int quantidade) throws ClassNotFoundException, SQLException {
+	public ArrayList<Pigmento> searchByQuantity(int quantidade) throws ClassNotFoundException, SQLException, IllegalAccessException {
 
 		Pigmento pigmento = null;
 	
-		PreparedStatement stmtRgb = this.getConnection().prepareStatement(PigmentoSQLDAO.SELECT_QUANTIDADERGB);
-		stmtRgb.setInt(1, quantidade);		
-		
-		ResultSet rSetRgb = stmtRgb.executeQuery();
-		
-		PreparedStatement stmtCmyk = this.getConnection().prepareStatement(PigmentoSQLDAO.SELECT_QUANTIDADECMYK);
-		stmtCmyk.setInt(1, quantidade);		
-		
-		ResultSet rSetCmyk = stmtCmyk.executeQuery();
-
-		while (rSetRgb.next()) {
-			pigmento = new Pigmento();
-			RGB rgb;
+		try {
+			PreparedStatement stmtRgb = this.getConnection().prepareStatement(PigmentoSQLDAO.SELECT_QUANTIDADERGB);
+			stmtRgb.setInt(1, quantidade);		
 			
-			pigmento.setNomeFantasia(rSetRgb.getString("NomeFantasia"));
-			pigmento.setPreco(rSetRgb.getFloat("preco"));
-			pigmento.setQuantidade(rSetRgb.getFloat("quantidade"));
-					
-			rgb = new RGB(	rSetRgb.getInt("red"),
-							rSetRgb.getInt("green"),
-							rSetRgb.getInt("blue"));
-
-			pigmento.setCor(rgb);
-			pigmentos.add(pigmento);
+			ResultSet rSetRgb = stmtRgb.executeQuery();
+			
+			PreparedStatement stmtCmyk = this.getConnection().prepareStatement(PigmentoSQLDAO.SELECT_QUANTIDADECMYK);
+			stmtCmyk.setInt(1, quantidade);		
+			
+			ResultSet rSetCmyk = stmtCmyk.executeQuery();
+	
+			while (rSetRgb.next()) {
+				pigmento = new Pigmento();
+				RGB rgb;
+				
+				pigmento.setNomeFantasia(rSetRgb.getString("NomeFantasia"));
+				pigmento.setPreco(rSetRgb.getFloat("preco"));
+				pigmento.setQuantidade(rSetRgb.getFloat("quantidade"));
+						
+				rgb = new RGB(	rSetRgb.getInt("red"),
+								rSetRgb.getInt("green"),
+								rSetRgb.getInt("blue"));
+	
+				pigmento.setCor(rgb);
+				pigmentos.add(pigmento);
+			}
+	
+			while (rSetCmyk.next()) {
+				pigmento = new Pigmento();
+				CMYK cmyk;
+				
+				pigmento.setNomeFantasia(rSetCmyk.getString("id_pigmento"));
+				pigmento.setPreco(rSetCmyk.getFloat("preco"));
+				pigmento.setQuantidade(rSetCmyk.getFloat("quantidade"));
+						
+				cmyk = new CMYK(rSetCmyk.getDouble("ciano"),
+								rSetCmyk.getDouble("magenta"),
+								rSetCmyk.getDouble("amarelo"),
+								rSetCmyk.getDouble("preto"));
+	
+				pigmento.setCor(cmyk);
+				pigmentos.add(pigmento);
 		}
 
-		while (rSetCmyk.next()) {
-			pigmento = new Pigmento();
-			CMYK cmyk;
-			
-			pigmento.setNomeFantasia(rSetCmyk.getString("id_pigmento"));
-			pigmento.setPreco(rSetCmyk.getFloat("preco"));
-			pigmento.setQuantidade(rSetCmyk.getFloat("quantidade"));
-					
-			cmyk = new CMYK(rSetCmyk.getDouble("ciano"),
-							rSetCmyk.getDouble("magenta"),
-							rSetCmyk.getDouble("amarelo"),
-							rSetCmyk.getDouble("preto"));
-
-			pigmento.setCor(cmyk);
-			pigmentos.add(pigmento);
+		} catch (SQLException e) {
+			throw new RuntimeException (e);
 		}
-
 		
 		return pigmentos;
 		
 	}
 
 	@Override
-	public Pigmento searchForRequest(String pigmento, ArrayList<Pigmento> p) throws ClassNotFoundException, SQLException {
+	public Pigmento searchForRequest(String pigmento, ArrayList<Pigmento> p) throws ClassNotFoundException, SQLException, ArrayIndexOutOfBoundsException {
 	
 		double[] distancia = new double[p.size()];
 		double menor = distancia[0];
 		int j=0;
 
 		RGB c = new RGB();		
-	//	System.out.println(pigmento);
 		((RGB)c).setCor(pigmento);	
 
 		for (int i=0; i< p.size(); i++) {
@@ -129,6 +135,7 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 				menor = distancia[i];
 				j = i;
 			}
+
 		}
 		
 		pigmento = p.get(j).getid_pigmento();
@@ -136,7 +143,7 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 	}
 
 	@Override
-	public Pigmento search(int quantidade, String pigmento) throws ClassNotFoundException, SQLException {
+	public Pigmento search(int quantidade, String pigmento) throws ClassNotFoundException, SQLException, IllegalAccessException, ArrayIndexOutOfBoundsException {
 		
 		pigmentos.clear();
 	
@@ -144,31 +151,26 @@ public class PigmentoSQLDAO extends AbstractSQLDAO implements PigmentoDAO{
 		Pigmento resultado = searchForRequest(pigmento, p);
 	
 		System.out.println("Cor: " +resultado.getNomeFantasia() +"\nQuantidade Pedida: " +quantidade);
-
-		/*eu debito do estoque*/
-<<<<<<< HEAD
-	//	resultado.debitar(quantidade);		
-	//	update(resultado);		
-	//	System.out.println("\nQuantidade atualizada: " +resultado.getQuantidade());
 		
-=======
-		resultado.debitar(quantidade);
-		
-		update(resultado);		
->>>>>>> ee45c0fcb04a8bf8543b3454be578ebca92eafe6
 		return resultado;
 	}
 
 	@Override
 	public void update(Pigmento p) throws ClassNotFoundException, SQLException {
 	
-		PreparedStatement stmt = this.getConnection().prepareStatement(PigmentoSQLDAO.UPDATE_QUANTIDADE);
+		PreparedStatement stmt;
 		
-		stmt.setFloat(1, p.getQuantidade());
-		stmt.setString(2, p.getNomeFantasia());
-		stmt.executeUpdate();		
-		stmt.close();
-		
+		try {
+			stmt = this.getConnection().prepareStatement(PigmentoSQLDAO.UPDATE_QUANTIDADE);
+			
+			stmt.setFloat(1, p.getQuantidade());
+			stmt.setString(2, p.getNomeFantasia());
+			stmt.executeUpdate();		
+			stmt.close();
+			
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}		
 	}
 	
 

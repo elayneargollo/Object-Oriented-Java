@@ -81,24 +81,42 @@ public class CorFrame extends JFrame{
 				Pigmento pigmento = null;
 				
 				try {
+					
 					quantidade = Integer.parseInt(qtdeField.getText());
+					
+					if (quantidade == 0 || quantidade < 0) {
+						JOptionPane.showConfirmDialog(context, "Quantidade deve ser válida !", "Error", JOptionPane.CLOSED_OPTION);
+						System.exit(0);
+					}
+					
+					
 				}catch (NumberFormatException e) {
-					System.out.println();
+					JOptionPane.showConfirmDialog(context, "Erro de leitura. Tente novamente ! ", "Error", JOptionPane.CLOSED_OPTION);
+					System.exit(0);
 				}
 				
 				try {
-					pigmento = pigmentoDAO.search(quantidade, nomeField.getText());					
-					
-					int escolha = JOptionPane.showConfirmDialog(context, "Pigmento: " +pigmento.getNomeFantasia() + "\nPreco: R$ " +pigmento.valor(quantidade),"Confirmar Compra",JOptionPane.YES_NO_OPTION);
-					
-					if(escolha == JOptionPane.YES_OPTION) {						
-						pigmento.debitar(quantidade);		
-						pigmentoDAO.update(pigmento);						
-					} 
-				
-				} catch (ClassNotFoundException | SQLException e) {
+						
+						pigmento = pigmentoDAO.search(quantidade, nomeField.getText());
+						
+						int escolha = JOptionPane.showConfirmDialog(context, "Pigmento: " +pigmento.getNomeFantasia() + "\nPreco: R$ " +pigmento.valor(quantidade) + "\n\nDeseja realizar a compra ?","Confirmar Compra",JOptionPane.YES_NO_OPTION);
+						
+						if(escolha == JOptionPane.YES_OPTION) {				
+							
+							pigmento.debitar(quantidade);		
+							pigmentoDAO.update(pigmento);	
+							
+						} 
+
+				} catch (ClassNotFoundException | SQLException |IllegalAccessException e) {
 					e.printStackTrace();
-				}			
+				} catch (ArrayIndexOutOfBoundsException e) {
+					JOptionPane.showConfirmDialog(context, "Não há quantidade suficiente no estoque !", "Error", JOptionPane.CLOSED_OPTION);
+				} catch (StringIndexOutOfBoundsException e) {
+					JOptionPane.showConfirmDialog(context, "Verifique campo cor !", "Error", JOptionPane.CLOSED_OPTION);
+				} catch (NumberFormatException e) {
+					JOptionPane.showConfirmDialog(context, "Formato equivocado da cor ", "Error", JOptionPane.CLOSED_OPTION);
+				}
 			}
 	
 			});			

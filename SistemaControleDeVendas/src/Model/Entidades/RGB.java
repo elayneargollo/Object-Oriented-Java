@@ -36,14 +36,14 @@ public class RGB extends Cor {
 		return blue;
 	}
 
-	public void setCor(String hex){
-		
+	public void setCor(String hex) throws StringIndexOutOfBoundsException{
 
-		String base = hex;
-		
-		red = Integer.parseInt ((String) base.subSequence(0, 2), 16);
-		green = Integer.parseInt ((String) base.subSequence(2, 4), 16);	
-		blue = Integer.parseInt ((String) base.subSequence(4, 6), 16);
+			String base = hex;
+			
+			red = Integer.parseInt ((String) base.subSequence(0, 2), 16);
+			green = Integer.parseInt ((String) base.subSequence(2, 4), 16);	
+			blue = Integer.parseInt ((String) base.subSequence(4, 6), 16);
+	
 	}
 	
 	@Override

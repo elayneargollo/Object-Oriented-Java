@@ -12,17 +12,16 @@ public abstract class AbstractSQLDAO {
 	private static final String PWD = "elayne";
 	
 
-	public Connection getConnection() throws ClassNotFoundException {
+	public Connection getConnection() throws ClassNotFoundException, SQLException, IllegalAccessException, ClassNotFoundException {
 		
 		try {
 		
 			Class.forName(AbstractSQLDAO.JDBC_DRIVER);
-			System.out.println("Conexao estabelecida com sucesso");
 			return DriverManager.getConnection(AbstractSQLDAO.URI, AbstractSQLDAO.USER,AbstractSQLDAO.PWD );
 			
 		} catch (SQLException e ) {
 			throw new RuntimeException (e);
-		}
+		}  
 	
 	}
 

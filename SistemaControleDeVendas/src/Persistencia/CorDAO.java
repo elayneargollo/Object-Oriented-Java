@@ -6,6 +6,6 @@ import Model.Entidades.Pigmento;
 
 public interface CorDAO {
 	
-	public void save(Cor cor, Pigmento pigmento) throws ClassNotFoundException, SQLException;
+	public void save(Cor cor, Pigmento pigmento) throws ClassNotFoundException, SQLException, IllegalAccessException;
 
 }

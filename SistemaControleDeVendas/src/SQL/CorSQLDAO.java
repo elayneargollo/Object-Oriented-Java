@@ -14,7 +14,7 @@ public class CorSQLDAO extends AbstractSQLDAO implements CorDAO {
 	private static String tipoCor;
 	
 	@Override
-	public void save(Cor cor, Pigmento pigmento) throws ClassNotFoundException, SQLException {
+	public void save(Cor cor, Pigmento pigmento) throws ClassNotFoundException, SQLException, IllegalAccessException {
 	
 		PreparedStatement stmt = this.getConnection().prepareStatement(CorSQLDAO.getInsert(cor));
 		
