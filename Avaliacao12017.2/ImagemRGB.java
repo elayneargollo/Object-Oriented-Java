@@ -1,5 +1,5 @@
 /*PARTE II - 7*/
-public ImagemRGB{
+public class ImagemRGB{
     private CorRGB[][] pixels;
 
     /*PARTE II - 8*/
