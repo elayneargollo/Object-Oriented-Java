@@ -1,6 +1,8 @@
+/*PARTE II - 7*/
 public ImagemRGB{
     private CorRGB[][] pixels;
 
+    /*PARTE II - 8*/
     public ImagemRGB (int altura, int largura){
         this.pixels = new CorRGB[altura][largura];
         for (int i=0; i<pixels.length; i++)
@@ -8,6 +10,7 @@ public ImagemRGB{
                 this.setPixel(i, j, new CorRGB(255,0,0))
     }
 
+    /* METODOS DE ACESSO - LEITURA/ESCRITA*/
     public int getAltura(){
         return this.altura;
     }
@@ -32,6 +35,7 @@ public ImagemRGB{
         this.pixels[i][j]=pixels;
     }
 
+    /*PARTE II - 9*/
     public CorRGB NewImagem(){
         Imagem newImagem = new CorRGB(this.getAltura(), this.getLargura());
 
