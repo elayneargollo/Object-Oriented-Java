@@ -1,14 +1,17 @@
+/* PARTE I - 1*/
 public CorRGB{
     private int red;
     private int green;
     private int blue;
 
+    /*PARTE I - 3*/
     public CorRGB(int red, int green, int blue){
         this.red = red;
         this.green = green;
         this.blue = blue;
     }
 
+    /*MÉTODOS DE ACESSO - LEITURA/ESCRITA*/
     public int getRed(){
         return this.red;
     }
@@ -39,22 +42,26 @@ public CorRGB{
         }
     }
 
+    /*PARTE I - 4*/
     public int getLuminosidade(){
         return ((int)(this.getRed*0.3) + (this.getGreen()*0.59) + (this.getBlue()*0.11));
     }
 
+    /*PARTE I - 5*/
     public boolean equals (CorRGB corRGB){
         return  this.getRed().equals(corRGB.getRed) &&
                 this.getBlue().equals(corRGB.getBlue()) &&
                 this.getGreen().equals(corRGB.getGreen());
     }  
 
+    /*PARTE I - 6*/
     public String ToString(){
         return "#" + RedparaString(red) 
                 + GreenparaString(green) 
                 + BlueparaString(blue);
     }
-
+    
+   /* TRANSFORMAÇÕES INT para HEXA */
     private char toHex(int valor){
         if (Valor < 10){
             return (char)(valor + '0');
