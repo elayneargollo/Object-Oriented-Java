@@ -1,5 +1,5 @@
 /* PARTE I - 1*/
-public CorRGB{
+public class CorRGB{
     private int red;
     private int green;
     private int blue;
