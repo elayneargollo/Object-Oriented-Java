@@ -1,7 +1,7 @@
 /* Iº Avaliação Individual – 2018*/
 
 /* PARTE I - 1 */
-public Coluna {
+public class Coluna {
     private String nome;
     private TipoColuna tipo;
     private boolean nulo;
