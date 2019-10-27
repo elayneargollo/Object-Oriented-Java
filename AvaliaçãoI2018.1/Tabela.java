@@ -1,7 +1,7 @@
 /* Iº Avaliação Individual – 2018*/
 
 /* PARTE II - 7 */
-public Tabela {
+public class Tabela {
     private String nome;
     private Coluna[] colunas;
 
