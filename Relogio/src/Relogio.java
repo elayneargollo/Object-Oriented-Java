@@ -3,6 +3,7 @@ public class Relogio {
 	int minuto;
 	int segundo;
 	
+	/*CONSTRUTORES*/	
 	public Relogio() {
 		this.hora = 0;
 		this.minuto = 0;
@@ -16,13 +17,11 @@ public class Relogio {
 	}
 	
 	public Relogio Inicializa(Relogio relogio) {
-		Relogio atual = new Relogio(relogio.getHora(),
-									relogio.getMinuto(),
-									relogio.getSegundo());
-		
+		Relogio atual = new Relogio(relogio.getHora(),relogio.getMinuto(),relogio.getSegundo());		
 		return atual;
 	}
 	
+	/* INCREMENTE QUANTIDADE DE SEGUNDO EM +1*/
 	public void IncrementSegundo(Relogio relogio) {
 		if (relogio.getSegundo() <= 59) {
 			relogio.setSegundo(relogio.getSegundo() + 1);
@@ -33,6 +32,7 @@ public class Relogio {
 		}
 	}
 
+	/* ALTERA SEGUNDOS PARA UM VALOR REQUISITADO*/
 	public void RequestSegundo(Relogio relogio, int segundo) {
 		if (relogio.getSegundo() <= 59) {
 			relogio.setSegundo(relogio.getSegundo() + segundo);
@@ -43,12 +43,13 @@ public class Relogio {
 		}
 	}
 	
-    public String toString(){
-        return  this.getHora() 
-        		+ ":" + this.getMinuto() 
-        		+ ":" + this.getSegundo();
-    }    
+	 public String toString(){
+		return  this.getHora() 
+			+ ":" + this.getMinuto() 
+			+ ":" + this.getSegundo();
+	    }    
 	
+	/*MÉTODOS DE ACESSO*/
 	public int getHora() {
 		return this.hora;
 	}
