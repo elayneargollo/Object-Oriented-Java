@@ -16,10 +16,7 @@ public class Relogio {
 	}
 	
 	public Relogio Inicializa(Relogio relogio) {
-		Relogio atual = new Relogio(relogio.getHora(),
-									relogio.getMinuto(),
-									relogio.getSegundo());
-		
+		Relogio atual = new Relogio(relogio.getHora(),relogio.getMinuto(),relogio.getSegundo());
 		return atual;
 	}
 	
@@ -43,11 +40,11 @@ public class Relogio {
 		}
 	}
 	
-    public String toString(){
-        return  this.getHora() 
+    	public String toString(){
+      		return  this.getHora() 
         		+ ":" + this.getMinuto() 
         		+ ":" + this.getSegundo();
-    }    
+ 	}    
 	
 	public int getHora() {
 		return this.hora;
