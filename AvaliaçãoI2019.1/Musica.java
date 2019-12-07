@@ -76,21 +76,7 @@ public class Musica {
 		
 		return false;
 	}
-	
-	public float QuantidadeArtistaCoincidente (Musica musica) {
-		float quantidade = 0;
-		
-		for (int i=0; i<nomeArtista.length; i++) {
-			for (int j=0; j<musica.nomeArtista.length; j++) {
-				if (this.nomeArtista[i].equals(musica.nomeArtista[j])){
-					quantidade ++;			
-				}
-			}
-		}
-	
-		return quantidade/nomeArtista.length;
-	}
-	
+
 	public boolean TituloIgual (Musica musica) {
 		return this.getTitulo().equals(musica.getTitulo());
 	}
@@ -121,18 +107,19 @@ public class Musica {
 		return valor;
 	}
 	
+		
+	public float QuantidadeArtistaCoincidente (Musica musica) {
+		float quantidade = 0;
+		
+		for (int i=0; i<nomeArtista.length; i++) {
+			for (int j=0; j<musica.nomeArtista.length; j++) {
+				if (this.nomeArtista[i].equals(musica.nomeArtista[j])){
+					quantidade ++;			
+				}
+			}
+		}
 	
-	public String toString() {
-		return "Titulo: "
-				+this.getTitulo()
-				+"\nCampo Harmonico: "
-				+this.getCampoHarmonico()
-				+"\nGenero: "
-				+this.getGenero()
-				+"\nDuracao Em Segundos: "
-				+this.getDuracaoEmSegundos()
-				+"\nNome Gravadora: "
-				+this.getNomeGravadora();
+		return quantidade/nomeArtista.length;
 	}
 
 }
