@@ -60,11 +60,11 @@ public class Musica {
  * a lista de nome de seus artistas é coincidente.*/
 	
 	public boolean equals (Musica musica) {
-		return this.TituloIgual(musica) && 
-			   this.ArtistaCoincidente(musica);
+		return this.tituloIgual(musica) && 
+			   this.artistaCoincidente(musica);
 	}
 	
-	public boolean ArtistaCoincidente (Musica musica) {
+	public boolean artistaCoincidente (Musica musica) {
 
 		for (int i=0; i<nomeArtista.length; i++) {
 			for (int j=0; j<musica.nomeArtista.length; j++) {
@@ -77,7 +77,7 @@ public class Musica {
 		return false;
 	}
 
-	public boolean TituloIgual (Musica musica) {
+	public boolean tituloIgual (Musica musica) {
 		return this.getTitulo().equals(musica.getTitulo());
 	}
 
@@ -102,13 +102,13 @@ public class Musica {
 			valor++;
 		}
 		
-		valor += QuantidadeArtistaCoincidente(musica);
+		valor += quantidadeArtistaCoincidente(musica);
 		
 		return valor;
 	}
 	
 		
-	public float QuantidadeArtistaCoincidente (Musica musica) {
+	public float quantidadeArtistaCoincidente (Musica musica) {
 		float quantidade = 0;
 		
 		for (int i=0; i<nomeArtista.length; i++) {
