@@ -18,28 +18,9 @@ public class Run {
 		System.out.println("------- Músicas ----------\n");
 		
 		System.out.println(musica.toString());
-		System.out.print("Artistas: ");
-		
-		for (int i=0; i<musica.nomeArtista.length; i++) {
-			System.out.println(musica.nomeArtista[i]);
-		}		
-		System.out.println("\n");
-		
-		System.out.println(musica2.toString());		
-		System.out.print("Artistas: ");
-		
-		for (int i=0; i<musica2.nomeArtista.length; i++) {
-			System.out.println(musica2.nomeArtista[i]);
-		}		
-		System.out.println("\n");
-		
+		System.out.println(musica2.toString());			
 		System.out.println(musica3.toString());
-		System.out.print("Artistas: ");
 		
-		for (int i=0; i<musica3.nomeArtista.length; i++) {
-			System.out.println(musica3.nomeArtista[i]);
-		}		
-
 		Playlist playlist = new Playlist("Bom Sucesso");
 		
 		System.out.println("\n------- Playlist " +playlist.getNomePlaylist() + "------\n");		
