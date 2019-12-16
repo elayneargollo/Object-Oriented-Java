@@ -1,5 +1,4 @@
 package Entendis;
-// 1) A estrutura estática da classe Músic
 
 public class Musica {
 	public String titulo;
@@ -8,10 +7,6 @@ public class Musica {
 	public String genero;
 	public CampoHarmonicoEnum campoHarmonico;
 	public String nomeGravadora;
-	
-/* 2) Um membro que inicialize a Música. 
- * Este membro deve garantir que todos os valores da música sejam
-   inicializados.Nenhum dos valores pode ser posteriormente alterado.*/
 	
 	public Musica (String titulo, Double duracaoEmSegundos, 
 			String genero, CampoHarmonicoEnum campoHarmonico, 
@@ -57,16 +52,12 @@ public class Musica {
 		nomeArtista = aux;				
 	}
 	
-/* 3) Um membro que verifique se duas músicas são iguais. 
- * Músicas são iguais se seus nomes são iguais e 
- * a lista de nome de seus artistas é coincidente.*/
-	
 	public boolean equals (Musica musica) {
 		return this.tituloIgual(musica) && 
-			   this.artistaCoincidente(musica);
+			   this.getArtistaCoincidente(musica);
 	}
 	
-	public boolean artistaCoincidente (Musica musica) {
+	public boolean getArtistaCoincidente (Musica musica) {
 
 		for (int i=0; i<nomeArtista.length; i++) {
 			for (int j=0; j<musica.nomeArtista.length; j++) {
@@ -79,7 +70,7 @@ public class Musica {
 		return false;
 	}
 	
-	public float quantidadeArtistaCoincidente (Musica musica) {
+	public float getQuantidadeArtistaCoincidente (Musica musica) {
 		float quantidade = 0;
 		
 		for (int i=0; i<nomeArtista.length; i++) {
@@ -97,15 +88,7 @@ public class Musica {
 		return this.getTitulo().equals(musica.getTitulo());
 	}
 
-/* 4) (2.0) um membro que calcule a proximidade de duas músicas. 
- * A proximidade duas músicas é um valor de 0 a 4,
- * calculado da forma que se segue: +1, 
- * quando o campo harmônico da faixa da música é coincidente; +1, 
- * quando agravadora é a mesma; +1 quando as músicas são do mesmo gênero 
- * e percentualmente um valor entre [0-1] que mostra a quantidade de artistas 
- * que coincidem nas duas faixas.*/
-	
-	public float aproximidadeMusical (Musica musica) {
+	public float getAproximidadeMusical (Musica musica) {
 		float valor = 0;
 		
 		if (this.getCampoHarmonico().equals(musica.getCampoHarmonico())) {
@@ -118,13 +101,18 @@ public class Musica {
 			valor++;
 		}
 		
-		valor += quantidadeArtistaCoincidente(musica);
+		valor += getQuantidadeArtistaCoincidente(musica);
 		
 		return valor;
 	}
 	
 	
 	public String toString() {
+		String str = "";
+		
+		 for(String n : this.nomeArtista)
+	          str+= n.toString() + "\n" ;		
+		 
 		return "Titulo: "
 				+this.getTitulo()
 				+"\nCampo Harmonico: "
@@ -134,7 +122,10 @@ public class Musica {
 				+"\nDuracao Em Segundos: "
 				+this.getDuracaoEmSegundos()
 				+"\nNome Gravadora: "
-				+this.getNomeGravadora();
+				+this.getNomeGravadora()
+				+"\nArtista: "
+				+str;
 	}
+	
 
 }

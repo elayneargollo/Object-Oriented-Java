@@ -1,7 +1,5 @@
 package Entendis;
 
-/* 5) A estrutura estática da classe playlist */
-
 public class Playlist {
 	public String nomePlaylist;
 	public Musica[] playlist = new Musica[0];
@@ -10,18 +8,27 @@ public class Playlist {
 		this.nomePlaylist = nomePlaylist;
 	}
 	
+	public void setNomePlaylist(String nomePlaylist) {
+		this.nomePlaylist = nomePlaylist;
+	}
+	
 	public String getNomePlaylist() {
 		return this.nomePlaylist;
 	}
 	
-/* 6) Um método de acesso que retorne a lista de músicas 
-	da playlist.*/
+	public double getDuracao () {
+		double duracao = 0;
+		
+		for (Musica m: this.playlist) {
+			duracao += m.getDuracaoEmSegundos();
+		}
+		
+		return duracao;
+	}
 
 	public Musica[] getPlaylist () {
 		return playlist;
 	}	
-	
-/* 7) Um método que permita adicionar uma música a playlist */
 	
 	public void adicionarMusica (Musica musica) {
 		Musica[] aux = new Musica[playlist.length+1];	
@@ -32,7 +39,16 @@ public class Playlist {
 		
 		aux[playlist.length] = musica;
 		playlist = aux;
-	}
+	}	
+	
+	public double getProximidade(Musica musica){
+	     double proximidade = 0;
+	     
+	      for(Musica m : this.playlist)
+	         if(m.getAproximidadeMusical(musica) > proximidade)
+	            proximidade = m.getAproximidadeMusical(musica);
+	       return proximidade;    
+	 }
 	
 	public String toString () {
 		 String str = "";
