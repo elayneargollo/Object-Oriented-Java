@@ -25,10 +25,6 @@ public class Playlist {
 		
 		return duracao;
 	}
-
-	public Musica[] getPlaylist () {
-		return playlist;
-	}	
 	
 	public void adicionarMusica (Musica musica) {
 		Musica[] aux = new Musica[playlist.length+1];	
