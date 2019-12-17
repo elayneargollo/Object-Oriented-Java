@@ -9,11 +9,7 @@ public class Palavra {
 	}
 	
 	public Palavra (String conteudo, Palavra palavra) {				
-		/*this.conteudo = conteudo;
-		this.similares = new Palavra[0];*/
-		
-		this(conteudo);
-		
+		this(conteudo);		
 		this.addPalavra(palavra);
 	}
 	
