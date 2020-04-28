@@ -16,15 +16,15 @@ public class JogadorDAO {
 	static MongoCollection<Document> jogadores;
 	Document doc;
 
-	public JogadorDAO() {
+	public JogadorDAO() throws Exception {
 		this.doc = new Document();
-	}
-
-	public void inserir(Jogador jogador) throws Exception {
+		
 		MongoClient con = Conexao.createConnectionToMyMongoDB();
 		MongoDatabase bancoDeDados = con.getDatabase("jogoMemoria");
 		jogadores = bancoDeDados.getCollection("jogador"); 
-		
+	}
+
+	public void inserir(Jogador jogador) throws Exception {		
 		doc.put("nomeJogador", jogador.getNomeJogador());
 		doc.put("pontuacao", jogador.getPontuacao());
 		jogadores.insertOne(doc);
@@ -32,9 +32,6 @@ public class JogadorDAO {
 
 
 	public void update(Jogador jogador) throws Exception {
-		MongoClient con = Conexao.createConnectionToMyMongoDB();
-		MongoDatabase bancoDeDados = con.getDatabase("jogoMemoria");
-		jogadores = bancoDeDados.getCollection("jogador"); 
 		
 		if (procurarJogador(jogador)) {
 
@@ -53,9 +50,6 @@ public class JogadorDAO {
 
 
 	public void mostrar() throws Exception {
-		MongoClient con = Conexao.createConnectionToMyMongoDB();
-		MongoDatabase bancoDeDados = con.getDatabase("jogoMemoria");
-		jogadores = bancoDeDados.getCollection("jogador"); 
 		
 		Map<String, String> mapCache = buscaOrdenada();
 
